@@ -3,7 +3,7 @@
 int n = 10;
 int k = 0;
 int arr[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-//int arr[10] = {13, 34, 1, 0, 9, 5, 7, 3, 45, 10};
+// int arr[10] = {13, 34, 1, 0, 9, 5, 7, 3, 45, 10};
 int i = 0;
 int j = 0;
 
@@ -23,9 +23,10 @@ int main()
 			"movq	i(%rip), %r10\n"	// %r10 = i
 			"movq	j(%rip), %r11\n"	// %r11 = j
 			"movq	n(%rip), %r12\n"	// %r12 = n
+			"movq	%r12, %r15\n"		// %r15 = %r12
+			"subq	$1, %r15\n"			// sub 1 from %r15 = n
 			"leaq	arr(%rip), %r13\n"	// adding to %r13 pointer to the start of arr
-			"leaq	36(%r13), %r14\n"	// adding to %r14 pointer to the last element of arr
-
+			"leaq	0(%r13, %r15, 4), %r14\n"	// adding to %r14 pointer to the last element of arr
 
 		"Cycle_I:\n"
 			"addq	$1, %r10\n"			// adding 1 to i
